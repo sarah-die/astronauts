@@ -1,7 +1,18 @@
 import React from 'react';
 import './App.css';
 
-function App() {
+import { useQuery } from '@tanstack/react-query';
+import { getAll } from './services/astronauts';
+
+const App = () => {
+  // const queryClient = useQueryClient();
+
+  const queryResult = useQuery(['astronauts'], getAll);
+  console.log('queryResult:', queryResult);
+
+  const astronauts = queryResult.data || [];
+  console.log('astronauts: ', astronauts);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,6 +30,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
