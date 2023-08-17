@@ -4,17 +4,20 @@ import { useQuery } from '@tanstack/react-query';
 import { getAll } from './services/astronauts';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from 'antd';
+import { MainFooter } from './components/MainFooter';
+import { HeaderElement } from './components/HeaderElement';
+import { SideMenu } from './components/SideMenu';
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const headerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  height: 64,
-  paddingInline: 50,
-  lineHeight: '64px',
-  backgroundColor: '#7dbcea',
-};
+// const headerStyle: React.CSSProperties = {
+//   textAlign: 'center',
+//   color: '#fff',
+//   height: 64,
+//   paddingInline: 50,
+//   lineHeight: '64px',
+//   backgroundColor: '#7dbcea',
+// };
 
 const contentStyle: React.CSSProperties = {
   textAlign: 'center',
@@ -47,9 +50,13 @@ const App = () => {
   return (
     <Router>
       <Layout>
-        <Header style={headerStyle}>Header</Header>
+        <Header style={{ backgroundColor: '#FFFFFF' }}>
+          <HeaderElement />
+        </Header>
         <Layout hasSider>
-          <Sider style={siderStyle}>Sider</Sider>
+          <Sider style={siderStyle}>
+            <SideMenu />
+          </Sider>
           <Content style={contentStyle}>
             <Routes>
               <Route path="/" element={<div>home</div>} />
@@ -59,7 +66,9 @@ const App = () => {
             </Routes>
           </Content>
         </Layout>
-        <Footer style={footerStyle}>Footer</Footer>
+        <Footer style={footerStyle}>
+          <MainFooter />
+        </Footer>
       </Layout>
     </Router>
   );
