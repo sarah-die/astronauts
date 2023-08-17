@@ -3,10 +3,9 @@ import './App.css';
 
 import { useQuery } from '@tanstack/react-query';
 import { getAll } from './services/astronauts';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
-  // const queryClient = useQueryClient();
-
   const queryResult = useQuery(['astronauts'], getAll);
   console.log('queryResult:', queryResult);
 
@@ -14,21 +13,16 @@ const App = () => {
   console.log('astronauts: ', astronauts);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {/* <Menu /> */}
+      <Routes>
+        <Route path="/" element={<div>home</div>} />
+        {/* <Route path="/astronaut/:id" element={<div></div>} /> */}
+        <Route path="/about" element={<div>about</div>} />
+        <Route path="/contact" element={<div>contact</div>} />
+      </Routes>
+      {/* <Footer /> */}
+    </Router>
   );
 };
 
