@@ -21,7 +21,12 @@ export const HeaderElement = () => {
   return (
     <Row>
       <Col span={12}>
-        <Menu mode="horizontal" defaultSelectedKeys={['1']} items={items} />
+        <Menu
+          mode="horizontal"
+          defaultSelectedKeys={['1']}
+          items={items}
+          style={{ backgroundColor: '#E6F4FF' }}
+        />
       </Col>
       <Col span={4} offset={8}>
         <Title level={4} type="success">
