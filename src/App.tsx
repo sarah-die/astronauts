@@ -7,6 +7,8 @@ import { Layout } from 'antd';
 import { MainFooter } from './components/MainFooter';
 import { HeaderElement } from './components/HeaderElement';
 import { SideMenu } from './components/SideMenu';
+import { Home } from './components/Home';
+import ScrollToHashElement from './components/ScrollToHashElement';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -50,6 +52,7 @@ const App = () => {
   return (
     <Router>
       <Layout>
+        <ScrollToHashElement />
         <Header style={{ backgroundColor: '#FFFFFF' }}>
           <HeaderElement />
         </Header>
@@ -59,7 +62,7 @@ const App = () => {
           </Sider>
           <Content style={contentStyle}>
             <Routes>
-              <Route path="/" element={<div>home</div>} />
+              <Route path="/" element={<Home />} />
               {/* <Route path="/astronaut/:id" element={<div></div>} /> */}
               <Route path="/about" element={<div>about</div>} />
               <Route path="/contact" element={<div>contact</div>} />
