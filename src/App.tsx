@@ -2,8 +2,8 @@ import './App.css';
 
 import { useQuery } from '@tanstack/react-query';
 import { getAll } from './services/astronauts';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Affix, Layout } from 'antd';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Affix, Button, Layout } from 'antd';
 import { MainFooter } from './components/MainFooter';
 import { HeaderElement } from './components/HeaderElement';
 import { SideMenu } from './components/SideMenu';
@@ -53,13 +53,20 @@ const App = () => {
     <Router>
       <Layout>
         <ScrollToHashElement />
-        <Header style={headerStyle}>
-          <HeaderElement />
-        </Header>
+        <section id="top">
+          <Header style={headerStyle}>
+            <HeaderElement />
+          </Header>
+        </section>
         <Layout hasSider>
           <Sider style={siderStyle}>
             <Affix offsetTop={30}>
               <SideMenu />
+            </Affix>
+            <Affix offsetTop={300}>
+              <Button>
+                <Link to="/#top">Top</Link>
+              </Button>
             </Affix>
           </Sider>
           <Content style={contentStyle}>
