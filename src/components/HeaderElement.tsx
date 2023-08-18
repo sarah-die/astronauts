@@ -1,17 +1,20 @@
 import { Col, Menu, Row, Typography } from 'antd';
+import { Link } from 'react-router-dom';
 const { Title } = Typography;
 
-function getItem(label: string, key: string) {
-  return {
-    key,
-    label,
-  };
-}
-
 const items = [
-  getItem('Home', '1'),
-  getItem('About', '2'),
-  getItem('Contact', '3'),
+  {
+    label: <Link to="/">Home</Link>,
+    key: '1',
+  },
+  {
+    label: <Link to="/about">About</Link>,
+    key: '2',
+  },
+  {
+    label: <Link to="/contact">Contact</Link>,
+    key: '3',
+  },
 ];
 
 export const HeaderElement = () => {
