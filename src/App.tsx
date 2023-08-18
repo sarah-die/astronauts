@@ -1,5 +1,4 @@
 import './App.css';
-
 import { useQuery } from '@tanstack/react-query';
 import { getAll } from './services/astronauts';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
@@ -9,6 +8,10 @@ import { HeaderElement } from './components/HeaderElement';
 import { SideMenu } from './components/SideMenu';
 import { Home } from './components/Home';
 import ScrollToHashElement from './components/ScrollToHashElement';
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { activePageState } from './recoilState/atom';
+import { About } from './components/About';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -18,15 +21,14 @@ const headerStyle: React.CSSProperties = {
   height: 64,
   paddingInline: 50,
   lineHeight: '64px',
-  backgroundColor: '#FFFFFF',
+  backgroundColor: '#E6F4FF',
 };
 
 const contentStyle: React.CSSProperties = {
   textAlign: 'center',
   minHeight: 120,
-  lineHeight: '120px',
-  color: '#fff',
-  backgroundColor: '#108ee9',
+  // lineHeight: '120px',
+  backgroundColor: '#e5e5e5',
 };
 
 const siderStyle: React.CSSProperties = {
@@ -39,18 +41,28 @@ const siderStyle: React.CSSProperties = {
 const footerStyle: React.CSSProperties = {
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: '#7dbcea',
+  backgroundColor: '#E6F4FF',
 };
 
 const App = () => {
-  const queryResult = useQuery(['astronauts'], getAll);
-  console.log('queryResult:', queryResult);
-
+  const queryResult = useQuery({
+    queryKey: ['astronauts'],
+    queryFn: getAll,
+  });
   const astronauts = queryResult.data || [];
   console.log('astronauts: ', astronauts);
 
+  const setActivePage = useSetRecoilState(activePageState);
+
   const currentPage = useLocation();
-  console.log('URL: ', currentPage);
+  // console.log('URL: ', currentPage);
+
+  useEffect(() => {
+    // ToDo
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    setActivePage(currentPage);
+  }, [currentPage]);
 
   return (
     <Layout>
@@ -79,7 +91,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             {/* <Route path="/astronaut/:id" element={<div></div>} /> */}
-            <Route path="/about" element={<div>about</div>} />
+            <Route path="/about" element={<About />} />
             <Route path="/contact" element={<div>contact</div>} />
           </Routes>
         </Content>
