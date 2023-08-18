@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { activePageState } from './recoilState/atom';
 import { About } from './components/About';
+import { Contact } from './components/Contact';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -92,7 +93,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             {/* <Route path="/astronaut/:id" element={<div></div>} /> */}
             <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<div>contact</div>} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </Content>
       </Layout>
