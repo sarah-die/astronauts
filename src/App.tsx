@@ -2,7 +2,7 @@ import './App.css';
 
 import { useQuery } from '@tanstack/react-query';
 import { getAll } from './services/astronauts';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Affix, Button, Layout } from 'antd';
 import { MainFooter } from './components/MainFooter';
 import { HeaderElement } from './components/HeaderElement';
@@ -49,16 +49,19 @@ const App = () => {
   const astronauts = queryResult.data || [];
   console.log('astronauts: ', astronauts);
 
+  const currentPage = useLocation();
+  console.log('URL: ', currentPage);
+
   return (
-    <Router>
-      <Layout>
-        <ScrollToHashElement />
-        <section id="top">
-          <Header style={headerStyle}>
-            <HeaderElement />
-          </Header>
-        </section>
-        <Layout hasSider>
+    <Layout>
+      <ScrollToHashElement />
+      <section id="top">
+        <Header style={headerStyle}>
+          <HeaderElement />
+        </Header>
+      </section>
+      <Layout hasSider>
+        {currentPage.pathname === '/' ? (
           <Sider style={siderStyle}>
             <Affix offsetTop={30}>
               <SideMenu />
@@ -69,20 +72,22 @@ const App = () => {
               </Button>
             </Affix>
           </Sider>
-          <Content style={contentStyle}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              {/* <Route path="/astronaut/:id" element={<div></div>} /> */}
-              <Route path="/about" element={<div>about</div>} />
-              <Route path="/contact" element={<div>contact</div>} />
-            </Routes>
-          </Content>
-        </Layout>
-        <Footer style={footerStyle}>
-          <MainFooter />
-        </Footer>
+        ) : (
+          <></>
+        )}
+        <Content style={contentStyle}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/astronaut/:id" element={<div></div>} /> */}
+            <Route path="/about" element={<div>about</div>} />
+            <Route path="/contact" element={<div>contact</div>} />
+          </Routes>
+        </Content>
       </Layout>
-    </Router>
+      <Footer style={footerStyle}>
+        <MainFooter />
+      </Footer>
+    </Layout>
   );
 };
 
