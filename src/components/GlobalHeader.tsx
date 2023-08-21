@@ -16,7 +16,7 @@ const items = [
   },
 ];
 
-export const HeaderElement = () => {
+export const GlobalHeader = () => {
   return (
     <Row>
       <Col span={12}>
