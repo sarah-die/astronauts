@@ -1,6 +1,6 @@
 import { Table, Typography } from 'antd';
 import { Astronaut } from '../types';
-import { ColumnProps } from 'antd/es/table';
+import { ColumnProps, TablePaginationConfig } from 'antd/es/table';
 const { Title } = Typography;
 
 export const AstronautTable = (props: {
@@ -71,10 +71,21 @@ export const AstronautTable = (props: {
       },
     },
   ];
+
+  const pagination: TablePaginationConfig = {
+    defaultPageSize: 10,
+    showSizeChanger: true,
+    pageSizeOptions: [10, 20, 30],
+  };
+
   return (
     <>
       <Title level={3}>{props.dataTitle}</Title>
-      <Table dataSource={props.dataSource} columns={colums}></Table>
+      <Table
+        dataSource={props.dataSource}
+        columns={colums}
+        pagination={pagination}
+      ></Table>
     </>
   );
 };
