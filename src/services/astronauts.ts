@@ -2,7 +2,8 @@ import axios from 'axios';
 import { AstronautData } from '../types';
 
 const astronautApi = axios.create({
-  baseURL: 'https://lldev.thespacedevs.com/2.2.0/astronaut',
+  baseURL: 'https://lldev.thespacedevs.com/2.2.0/astronaut/?limit=100',
+  // baseURL: 'https://ll.thespacedevs.com/2.2.0/astronaut/?limit=100',
   timeout: 1000,
   // headers: {'X-Custom-Header': 'foobar'}
 });
