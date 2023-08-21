@@ -27,3 +27,17 @@ export interface AstronautsStatus {
 export interface AstronautData {
   results?: Astronaut[];
 }
+
+export interface AgencyDetail {
+  name: string;
+  type: string;
+  coutry_code: string;
+  abbrev: string;
+  description: string;
+  founding_year: string;
+  logo_url: string;
+}
+
+export interface AgencyData {
+  results?: AgencyDetail[];
+}
