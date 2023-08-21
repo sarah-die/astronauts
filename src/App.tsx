@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getAll } from './services/astronauts';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Affix, Button, Layout } from 'antd';
-import { MainFooter } from './components/MainFooter';
-import { HeaderElement } from './components/HeaderElement';
+import { MainFooter } from './components/GlobalFooter';
+import { HeaderElement } from './components/GlobalHeader';
 import { SideMenu } from './components/SideMenu';
 import { Home } from './components/Home';
 import ScrollToHashElement from './components/ScrollToHashElement';
@@ -59,7 +59,7 @@ const App = () => {
   // console.log('URL: ', currentPage);
 
   useEffect(() => {
-    // ToDo
+    // TODO
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     setActivePage(currentPage);

@@ -1,6 +1,5 @@
-import { Col, Menu, Row, Typography } from 'antd';
+import { Col, Image, Menu, Row } from 'antd';
 import { Link } from 'react-router-dom';
-const { Title } = Typography;
 
 const items = [
   {
@@ -29,9 +28,10 @@ export const HeaderElement = () => {
         />
       </Col>
       <Col span={4} offset={8}>
-        <Title level={4} type="success">
-          Logo
-        </Title>
+        <Image
+          width={30}
+          src="https://loremicon.com/ngon/128/128/261847001528/jpg"
+        />
       </Col>
     </Row>
   );
