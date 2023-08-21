@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getAll } from '../services/astronauts';
 import { Astronaut } from '../types';
 import { AstronautTable } from './AstronautTable';
+import { Col, Row } from 'antd';
 
 export const Home = () => {
   const queryResult = useQuery({
@@ -43,25 +44,31 @@ export const Home = () => {
   );
 
   return (
-    <div>
-      <section id="active-astronauts">
-        <AstronautTable
-          dataSource={activeAstronauts}
-          dataTitle="Active Astronauts"
-        />
-      </section>
-      <section id="retired-astronauts">
-        <AstronautTable
-          dataSource={retiredAstronauts}
-          dataTitle="Retired Astronauts"
-        />
-      </section>
-      <section id="currently-in-space">
-        <AstronautTable
-          dataSource={currentlyInSpace}
-          dataTitle="Currently in Space"
-        />
-      </section>
-    </div>
+    <Row style={{ display: 'flex', justifyContent: 'center' }}>
+      <Col className="gutter-row" span={22}>
+        <section id="active-astronauts">
+          <AstronautTable
+            dataSource={activeAstronauts}
+            dataTitle="Active Astronauts"
+          />
+        </section>
+      </Col>
+      <Col className="gutter-row" span={22}>
+        <section id="retired-astronauts">
+          <AstronautTable
+            dataSource={retiredAstronauts}
+            dataTitle="Retired Astronauts"
+          />
+        </section>
+      </Col>
+      <Col className="gutter-row" span={22}>
+        <section id="currently-in-space">
+          <AstronautTable
+            dataSource={currentlyInSpace}
+            dataTitle="Currently in Space"
+          />
+        </section>
+      </Col>
+    </Row>
   );
 };
