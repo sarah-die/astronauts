@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getAll } from '../services/astronauts';
 import { Astronaut } from '../types';
+import { AstronautTable } from './AstronautTable';
 
 export const Home = () => {
   const queryResult = useQuery({
@@ -12,41 +13,54 @@ export const Home = () => {
     return <div>loading data ...</div>;
   }
 
-  const myData: Astronaut[] | undefined = queryResult.data?.results.map(
+  // console.log('raw', queryResult.data?.results);
+
+  const myData: Astronaut[] | undefined = queryResult.data?.results?.map(
     (item) => ({
       name: item.name,
       age: item.age,
       agency: item.agency,
+      agency_abbrev: item.agency.abbrev,
       nationality: item.nationality,
+      in_space: item.in_space,
       status: item.status,
+      status_name: item.status.name,
       flights_count: item.flights_count,
       spacewalks_count: item.spacewalks_count,
+      id: item.id,
+      key: `key-${item.id}`,
     }),
   );
-  console.log('DATA', myData);
+
+  const activeAstronauts: Astronaut[] | undefined = myData?.filter(
+    (item: Astronaut) => item.status_name === 'Active',
+  );
+  const retiredAstronauts: Astronaut[] | undefined = myData?.filter(
+    (item: Astronaut) => item.status_name === 'Retired',
+  );
+  const currentlyInSpace: Astronaut[] | undefined = myData?.filter(
+    (item: Astronaut) => item.in_space === true,
+  );
 
   return (
     <div>
       <section id="active-astronauts">
-        <div style={{ height: 500 }}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, sequi
-          at voluptates beatae nulla optio eius quaerat, ad eaque enim obcaecati
-          non voluptas esse cumque tenetur, id blanditiis vel dolor.
-        </div>
+        <AstronautTable
+          dataSource={activeAstronauts}
+          dataTitle="Active Astronauts"
+        />
       </section>
       <section id="retired-astronauts">
-        <div style={{ height: 500 }}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, sequi
-          at voluptates beatae nulla optio eius quaerat, ad eaque enim obcaecati
-          non voluptas esse cumque tenetur, id blanditiis vel dolor.
-        </div>
+        <AstronautTable
+          dataSource={retiredAstronauts}
+          dataTitle="Retired Astronauts"
+        />
       </section>
       <section id="currently-in-space">
-        <div style={{ height: 500 }}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, sequi
-          at voluptates beatae nulla optio eius quaerat, ad eaque enim obcaecati
-          non voluptas esse cumque tenetur, id blanditiis vel dolor.
-        </div>
+        <AstronautTable
+          dataSource={currentlyInSpace}
+          dataTitle="Currently in Space"
+        />
       </section>
     </div>
   );

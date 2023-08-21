@@ -2,10 +2,15 @@ export interface Astronaut {
   name: string;
   age: number;
   agency: Agency;
+  agency_abbrev: string;
   nationality: string;
-  status: 'Active' | 'Retired';
+  in_space: boolean;
+  status: AstronautsStatus;
+  status_name: string;
   flights_count: number;
   spacewalks_count: number;
+  id: number;
+  key: string;
 }
 
 export interface Agency {
@@ -14,6 +19,11 @@ export interface Agency {
   logo_url: string;
 }
 
+export interface AstronautsStatus {
+  id: number;
+  name: 'Active' | 'Retired';
+}
+
 export interface AstronautData {
-  results: Astronaut[];
+  results?: Astronaut[];
 }
