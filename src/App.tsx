@@ -1,16 +1,11 @@
 import './App.css';
-import { useQuery } from '@tanstack/react-query';
-import { getAll } from './services/astronauts';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Affix, Button, Layout } from 'antd';
-import { MainFooter } from './components/GlobalFooter';
-import { HeaderElement } from './components/GlobalHeader';
+import { GlobalFooter } from './components/GlobalFooter';
+import { GlobalHeader } from './components/GlobalHeader';
 import { SideMenu } from './components/SideMenu';
 import { Home } from './components/Home';
 import ScrollToHashElement from './components/ScrollToHashElement';
-import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { activePageState } from './recoilState/atom';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
 
@@ -46,31 +41,15 @@ const footerStyle: React.CSSProperties = {
 };
 
 const App = () => {
-  const queryResult = useQuery({
-    queryKey: ['astronauts'],
-    queryFn: getAll,
-  });
-  const astronauts = queryResult.data || [];
-  console.log('astronauts: ', astronauts);
-
-  const setActivePage = useSetRecoilState(activePageState);
-
   const currentPage = useLocation();
   // console.log('URL: ', currentPage);
-
-  useEffect(() => {
-    // TODO
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    setActivePage(currentPage);
-  }, [currentPage]);
 
   return (
     <Layout>
       <ScrollToHashElement />
       <section id="top">
         <Header style={headerStyle}>
-          <HeaderElement />
+          <GlobalHeader />
         </Header>
       </section>
       <Layout hasSider>
@@ -98,7 +77,7 @@ const App = () => {
         </Content>
       </Layout>
       <Footer style={footerStyle}>
-        <MainFooter />
+        <GlobalFooter />
       </Footer>
     </Layout>
   );

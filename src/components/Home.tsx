@@ -1,4 +1,30 @@
+import { useQuery } from '@tanstack/react-query';
+import { getAll } from '../services/astronauts';
+import { Astronaut } from '../types';
+
 export const Home = () => {
+  const queryResult = useQuery({
+    queryKey: ['astronauts'],
+    queryFn: getAll,
+  });
+
+  if (queryResult.isLoading) {
+    return <div>loading data ...</div>;
+  }
+
+  const myData: Astronaut[] | undefined = queryResult.data?.results.map(
+    (item) => ({
+      name: item.name,
+      age: item.age,
+      agency: item.agency,
+      nationality: item.nationality,
+      status: item.status,
+      flights_count: item.flights_count,
+      spacewalks_count: item.spacewalks_count,
+    }),
+  );
+  console.log('DATA', myData);
+
   return (
     <div>
       <section id="active-astronauts">

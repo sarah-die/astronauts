@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AstronautData } from '../types';
 
 const astronautApi = axios.create({
   baseURL: 'https://lldev.thespacedevs.com/2.2.0/astronaut',
@@ -7,8 +8,7 @@ const astronautApi = axios.create({
 });
 
 export const getAll = async () => {
-  const { data } = await astronautApi.get<string[]>("");
-
+  const { data } = await astronautApi.get<AstronautData>('');
   return data;
 };
 
@@ -21,9 +21,7 @@ export const getFiltered = async (filter: string, filterInput: string) => {
 };
 
 export const getSearch = async (searchParam: string) => {
-  const { data } = await axios.get<string[]>(
-    `?search=${searchParam}`,
-  );
+  const { data } = await axios.get<string[]>(`?search=${searchParam}`);
 
   return data;
 };
