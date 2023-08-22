@@ -5,9 +5,6 @@ import { AstronautTable } from './AstronautTable';
 import { Col, Row } from 'antd';
 import { useSetRecoilState } from 'recoil';
 import { astronautLoadingState } from '../recoilState/atom';
-// import { getSearch } from '../services/agencies';
-// import { useRecoilState } from 'recoil';
-// import { searchParamAgencyState } from '../recoilState/atom';
 
 export const Home = () => {
   const setAstronautLoading = useSetRecoilState(astronautLoadingState);
@@ -20,18 +17,6 @@ export const Home = () => {
     },
   });
 
-  // const [searchParamAgency, setSearchParamAgency] = useRecoilState(
-  //   searchParamAgencyState,
-  // );
-  // setSearchParamAgency('nasa');
-
-  // // ToDo wrong place maybe.. but works atleast
-  // const queryAgencies = useQuery({
-  //   queryKey: ['agencies', searchParamAgency],
-  //   queryFn: () => getSearch(searchParamAgency),
-  // });
-  // console.log('agency', queryAgencies.data);
-
   const myData: Astronaut[] =
     queryAstronauts.data?.results?.map((item) => ({
       ...item,
@@ -41,7 +26,6 @@ export const Home = () => {
   const activeAstronauts = myData.filter(
     (item) => item.status.name === 'Active',
   );
-
   const retiredAstronauts: Astronaut[] = myData.filter(
     (item: Astronaut) => item.status.name === 'Retired',
   );

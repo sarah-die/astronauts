@@ -28,3 +28,8 @@ export const astronautLoadingState = atom({
   key: 'astronautLoadingState',
   default: true as boolean,
 });
+
+export const modalOpenState = atom({
+  key: 'modalOpenState',
+  default: false as boolean,
+});

@@ -1,8 +1,13 @@
-import { Table, Typography } from 'antd';
+import { Button, Table, Typography } from 'antd';
 import { Agency, Astronaut } from '../types';
 import { ColumnProps, TablePaginationConfig } from 'antd/es/table';
-import { useRecoilValue } from 'recoil';
-import { astronautLoadingState } from '../recoilState/atom';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import {
+  astronautLoadingState,
+  modalOpenState,
+  searchParamAgencyState,
+} from '../recoilState/atom';
+import { AgencyModal } from './AgencyModal';
 const { Title } = Typography;
 
 export const AstronautTable = (props: {
@@ -10,6 +15,8 @@ export const AstronautTable = (props: {
   dataTitle: string;
 }) => {
   const astronautLoading = useRecoilValue(astronautLoadingState);
+  const [modalOpen, setModalOpen] = useRecoilState(modalOpenState);
+  const setSearchParamAgency = useSetRecoilState(searchParamAgencyState);
 
   const uniqueAgencyProps: string[] = Array.from(
     new Set(props.dataSource?.map((item) => item.agency.abbrev)),
@@ -20,9 +27,13 @@ export const AstronautTable = (props: {
   const uniqueNationalityProps: string[] = Array.from(
     new Set(props.dataSource?.map((item) => item.nationality)),
   );
-
   const nationalityFilters: { text: string; value: string }[] =
     uniqueNationalityProps.map((item) => ({ text: item, value: item }));
+
+  const handleAgencyClick = (searchParam: string) => () => {
+    setModalOpen(true);
+    setSearchParamAgency(searchParam);
+  };
 
   const colums: ColumnProps<Astronaut>[] = [
     {
@@ -46,7 +57,13 @@ export const AstronautTable = (props: {
       title: 'Agency',
       dataIndex: 'agency',
       key: 'agency',
-      render: (agency: Agency): string => agency.abbrev,
+      render: (agency: Agency) => (
+        <>
+          <Button onClick={handleAgencyClick(agency.abbrev)}>
+            {agency.abbrev}
+          </Button>
+        </>
+      ),
       filters: agencyFilters,
       onFilter: (value: string | number | boolean, record: Astronaut) =>
         record.agency.abbrev === value,
@@ -97,6 +114,7 @@ export const AstronautTable = (props: {
         pagination={pagination}
         loading={loading}
       ></Table>
+      {modalOpen && <AgencyModal></AgencyModal>}
     </>
   );
 };
