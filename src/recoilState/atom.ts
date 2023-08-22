@@ -18,3 +18,13 @@ export const colorScheme = atom({
   key: 'colorScheme',
   default: 'light' as string,
 });
+
+export const searchParamAgencyState = atom({
+  key: 'searchParamAgencyState',
+  default: '' as string,
+});
+
+export const astronautLoadingState = atom({
+  key: 'astronautLoadingState',
+  default: true as boolean,
+});

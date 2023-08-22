@@ -1,12 +1,16 @@
 import { Table, Typography } from 'antd';
 import { Agency, Astronaut } from '../types';
 import { ColumnProps, TablePaginationConfig } from 'antd/es/table';
+import { useRecoilValue } from 'recoil';
+import { astronautLoadingState } from '../recoilState/atom';
 const { Title } = Typography;
 
 export const AstronautTable = (props: {
   dataSource: Astronaut[] | undefined;
   dataTitle: string;
 }) => {
+  const astronautLoading = useRecoilValue(astronautLoadingState);
+
   const uniqueAgencyProps: string[] = Array.from(
     new Set(props.dataSource?.map((item) => item.agency.abbrev)),
   );
@@ -42,7 +46,7 @@ export const AstronautTable = (props: {
       title: 'Agency',
       dataIndex: 'agency',
       key: 'agency',
-      render: (agency: Agency): string => agency['abbrev'],
+      render: (agency: Agency): string => agency.abbrev,
       filters: agencyFilters,
       onFilter: (value: string | number | boolean, record: Astronaut) =>
         record.agency.abbrev === value,
@@ -79,6 +83,11 @@ export const AstronautTable = (props: {
     pageSizeOptions: [10, 20, 30],
   };
 
+  const loading = {
+    // indicator: <>is loading...</>,
+    spinning: astronautLoading,
+  };
+
   return (
     <>
       <Title level={3}>{props.dataTitle}</Title>
@@ -86,6 +95,7 @@ export const AstronautTable = (props: {
         dataSource={props.dataSource}
         columns={colums}
         pagination={pagination}
+        loading={loading}
       ></Table>
     </>
   );
