@@ -1,5 +1,5 @@
 import { Table, Typography } from 'antd';
-import { Astronaut } from '../types';
+import { Agency, Astronaut } from '../types';
 import { ColumnProps, TablePaginationConfig } from 'antd/es/table';
 const { Title } = Typography;
 
@@ -8,7 +8,7 @@ export const AstronautTable = (props: {
   dataTitle: string;
 }) => {
   const uniqueAgencyProps: string[] = Array.from(
-    new Set(props.dataSource?.map((item) => item.agency_abbrev)),
+    new Set(props.dataSource?.map((item) => item.agency.abbrev)),
   );
   const agencyFilters: { text: string; value: string }[] =
     uniqueAgencyProps.map((item) => ({ text: item, value: item }));
@@ -40,11 +40,12 @@ export const AstronautTable = (props: {
     },
     {
       title: 'Agency',
-      dataIndex: 'agency_abbrev',
-      key: 'agency_abbrev',
+      dataIndex: 'agency',
+      key: 'agency',
+      render: (agency: Agency): string => agency['abbrev'],
       filters: agencyFilters,
       onFilter: (value: string | number | boolean, record: Astronaut) =>
-        record.agency_abbrev === value,
+        record.agency.abbrev === value,
     },
     {
       title: 'Nationality',

@@ -5,42 +5,33 @@ import { AstronautTable } from './AstronautTable';
 import { Col, Row } from 'antd';
 
 export const Home = () => {
-  const queryResult = useQuery({
+  const queryAstronauts = useQuery({
     queryKey: ['astronauts'],
     queryFn: getAll,
   });
 
-  if (queryResult.isLoading) {
+  if (queryAstronauts.isLoading) {
     return <div>loading data ...</div>;
   }
 
-  // console.log('raw', queryResult.data?.results);
+  console.log('raw', queryAstronauts.data?.results);
 
-  const myData: Astronaut[] | undefined = queryResult.data?.results?.map(
-    (item) => ({
-      name: item.name,
-      age: item.age,
-      agency: item.agency,
-      agency_abbrev: item.agency.abbrev,
-      nationality: item.nationality,
-      in_space: item.in_space,
-      status: item.status,
-      status_name: item.status.name,
-      flights_count: item.flights_count,
-      spacewalks_count: item.spacewalks_count,
-      id: item.id,
+  const myData: Astronaut[] =
+    queryAstronauts.data?.results?.map((item) => ({
+      ...item,
       key: `key-${item.id}`,
-    }),
-  );
+    })) || [];
 
-  const activeAstronauts: Astronaut[] | undefined = myData?.filter(
-    (item: Astronaut) => item.status_name === 'Active',
+  const activeAstronauts = myData.filter(
+    (item) => item.status.name === 'Active',
   );
-  const retiredAstronauts: Astronaut[] | undefined = myData?.filter(
-    (item: Astronaut) => item.status_name === 'Retired',
+  console.log('data', activeAstronauts);
+
+  const retiredAstronauts: Astronaut[] = myData.filter(
+    (item: Astronaut) => item.status.name === 'Retired',
   );
-  const currentlyInSpace: Astronaut[] | undefined = myData?.filter(
-    (item: Astronaut) => item.in_space === true,
+  const currentlyInSpace: Astronaut[] = myData.filter(
+    (item: Astronaut) => item.in_space,
   );
 
   return (
