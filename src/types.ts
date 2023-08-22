@@ -15,6 +15,7 @@ export interface Agency {
   abbrev: string;
   name: string;
   logo_url: string;
+  id: number;
 }
 
 export interface AstronautsStatus {
@@ -29,7 +30,7 @@ export interface AstronautData {
 export interface AgencyDetail {
   name: string;
   type: string;
-  coutry_code: string;
+  country_code: string;
   abbrev: string;
   description: string;
   founding_year: string;

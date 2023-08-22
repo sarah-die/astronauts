@@ -30,9 +30,10 @@ export const AstronautTable = (props: {
   const nationalityFilters: { text: string; value: string }[] =
     uniqueNationalityProps.map((item) => ({ text: item, value: item }));
 
-  const handleAgencyClick = (searchParam: string) => () => {
+  const handleAgencyClick = (agencyId: number) => () => {
+    // ToDo combine both states -> modal is open, when param !== ""
     setModalOpen(true);
-    setSearchParamAgency(searchParam);
+    setSearchParamAgency(agencyId);
   };
 
   const colums: ColumnProps<Astronaut>[] = [
@@ -59,7 +60,7 @@ export const AstronautTable = (props: {
       key: 'agency',
       render: (agency: Agency) => (
         <>
-          <Button onClick={handleAgencyClick(agency.abbrev)}>
+          <Button onClick={handleAgencyClick(agency.id)}>
             {agency.abbrev}
           </Button>
         </>
