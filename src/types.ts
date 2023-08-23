@@ -1,3 +1,7 @@
+export interface AstronautData {
+  results?: Astronaut[];
+}
+
 export interface Astronaut {
   name: string;
   age: number;
@@ -23,20 +27,14 @@ export interface AstronautsStatus {
   name: 'Active' | 'Retired';
 }
 
-export interface AstronautData {
-  results?: Astronaut[];
-}
-
 export interface AgencyDetail {
-  name: string;
-  type: string;
-  country_code: string;
-  abbrev: string;
-  description: string;
-  founding_year: string;
-  logo_url: string;
-}
-
-export interface AgencyData {
-  results?: AgencyDetail[];
+  name?: string;
+  type?: string;
+  country_code?: string;
+  abbrev?: string;
+  description?: string;
+  founding_year?: string;
+  logo_url?: string;
+  info_url?: string;
+  image_url?: string;
 }
