@@ -67,13 +67,15 @@ export const AstronautTable = (props: {
       ),
       filters: agencyFilters,
       onFilter: (value: string | number | boolean, record: Astronaut) =>
-        record.agency.abbrev === value,
+        record.agency.abbrev.indexOf(value.toString()) === 0,
     },
     {
       title: 'Nationality',
       dataIndex: 'nationality',
       key: 'nationality',
       filters: nationalityFilters,
+      onFilter: (value: string | number | boolean, record: Astronaut) =>
+        record.nationality.indexOf(value.toString()) === 0,
     },
     {
       title: 'Flights Count',
