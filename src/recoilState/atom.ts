@@ -8,15 +8,9 @@ export const colorScheme = atom({
   default: 'light' as string,
 });
 
-// ToDo combine both states -> modal is open, when !undefined
 export const searchParamAgencyState = atom({
   key: 'searchParamAgencyState',
-  default: undefined as number | undefined,
-});
-
-export const modalOpenState = atom({
-  key: 'modalOpenState',
-  default: false as boolean,
+  default: null as number | null,
 });
 
 export const astronautLoadingState = atom({

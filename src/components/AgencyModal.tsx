@@ -1,6 +1,6 @@
 import { Col, Divider, Image, Modal, Row, Spin, Typography } from 'antd';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { modalOpenState, searchParamAgencyState } from '../recoilState/atom';
+import { useRecoilState } from 'recoil';
+import { searchParamAgencyState } from '../recoilState/atom';
 import { useQuery } from '@tanstack/react-query';
 import { getById } from '../services/agencies';
 import { AgencyDetail } from '../types';
@@ -8,8 +8,9 @@ import { Link } from 'react-router-dom';
 const { Title, Text } = Typography;
 
 export const AgencyModal = () => {
-  const [modalOpen, setModalOpen] = useRecoilState(modalOpenState);
-  const searchParamAgency = useRecoilValue(searchParamAgencyState);
+  const [searchParamAgency, setSearchParamAgency] = useRecoilState(
+    searchParamAgencyState,
+  );
 
   const queryAgencies = useQuery({
     queryKey: ['agencies', searchParamAgency],
@@ -17,15 +18,14 @@ export const AgencyModal = () => {
   });
 
   const agency: AgencyDetail = queryAgencies.data || {};
-  // console.log('agency inside Modal', agency);
 
   return (
     <>
       <Modal
         title={agency.abbrev}
         centered
-        open={modalOpen}
-        onCancel={() => setModalOpen(false)}
+        open={!!searchParamAgency}
+        onCancel={() => setSearchParamAgency(null)}
         footer={null}
       >
         {queryAgencies.status === 'loading' ? (

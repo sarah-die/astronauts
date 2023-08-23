@@ -1,10 +1,9 @@
 import { Button, Table, Typography } from 'antd';
 import { Agency, Astronaut } from '../types';
 import { ColumnProps, TablePaginationConfig } from 'antd/es/table';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   astronautLoadingState,
-  modalOpenState,
   searchParamAgencyState,
 } from '../recoilState/atom';
 import { AgencyModal } from './AgencyModal';
@@ -15,8 +14,9 @@ export const AstronautTable = (props: {
   dataTitle: string;
 }) => {
   const astronautLoading = useRecoilValue(astronautLoadingState);
-  const [modalOpen, setModalOpen] = useRecoilState(modalOpenState);
-  const setSearchParamAgency = useSetRecoilState(searchParamAgencyState);
+  const [searchParamAgency, setSearchParamAgency] = useRecoilState(
+    searchParamAgencyState,
+  );
 
   const uniqueAgencyProps: string[] = Array.from(
     new Set(props.dataSource?.map((item) => item.agency.abbrev)),
@@ -31,8 +31,6 @@ export const AstronautTable = (props: {
     uniqueNationalityProps.map((item) => ({ text: item, value: item }));
 
   const handleAgencyClick = (agencyId: number) => () => {
-    // ToDo combine both states -> modal is open, when param !== ""
-    setModalOpen(true);
     setSearchParamAgency(agencyId);
   };
 
@@ -104,7 +102,6 @@ export const AstronautTable = (props: {
   };
 
   const loading = {
-    // indicator: <>is loading...</>,
     spinning: astronautLoading,
   };
 
@@ -117,7 +114,7 @@ export const AstronautTable = (props: {
         pagination={pagination}
         loading={loading}
       ></Table>
-      {modalOpen && <AgencyModal></AgencyModal>}
+      {searchParamAgency && <AgencyModal></AgencyModal>}
     </>
   );
 };

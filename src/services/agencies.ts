@@ -8,7 +8,7 @@ const agencyApi = axios.create({
   // headers: {'X-Custom-Header': 'foobar'}
 });
 
-export const getById = async (agencyId: number | undefined) => {
+export const getById = async (agencyId: number | null) => {
   const { data } = await agencyApi.get<AgencyDetail>(`/${agencyId}`);
 
   return data;
