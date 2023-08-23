@@ -4,8 +4,20 @@ import { useLocation } from 'react-router-dom';
 const ScrollToHashElement = () => {
   const location = useLocation();
 
+  const locationKey = useMemo(() => {
+    const hash = location.hash;
+
+    if (hash) {
+      const key = location.key;
+      return key;
+    } else {
+      return null;
+    }
+  }, [location]);
+
   const hashElement = useMemo(() => {
     const hash = location.hash;
+
     const removeHashCharacter = (str: string) => {
       const result = str.slice(1);
       return result;
@@ -20,6 +32,8 @@ const ScrollToHashElement = () => {
   }, [location]);
 
   useEffect(() => {
+    console.log('useEffect triggered');
+
     if (hashElement) {
       hashElement.scrollIntoView({
         behavior: 'smooth',
@@ -27,7 +41,7 @@ const ScrollToHashElement = () => {
         inline: 'nearest',
       });
     }
-  }, [hashElement]);
+  }, [hashElement, locationKey]);
 
   return null;
 };
