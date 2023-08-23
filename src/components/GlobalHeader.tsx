@@ -1,5 +1,7 @@
-import { Col, Image, Menu, Row } from 'antd';
+import { Col, Image, Menu, Row, Switch } from 'antd';
 import { Link } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { darkModeState } from '../recoilState/atom';
 
 const items = [
   {
@@ -17,20 +19,24 @@ const items = [
 ];
 
 export const GlobalHeader = () => {
+  const [darkMode, setDarkMode] = useRecoilState(darkModeState);
+
   return (
     <Row>
-      <Col span={12}>
-        <Menu
-          mode="horizontal"
-          defaultSelectedKeys={['1']}
-          items={items}
-          style={{ backgroundColor: '#E6F4FF' }}
-        />
+      <Col span={10}>
+        <Menu mode="horizontal" defaultSelectedKeys={['1']} items={items} />
       </Col>
-      <Col span={4} offset={8}>
+      <Col span={2} offset={10}>
         <Image
           width={30}
           src="https://loremicon.com/ngon/128/128/261847001528/jpg"
+        />
+      </Col>
+      <Col span={2}>
+        <Switch
+          onChange={() => setDarkMode(!darkMode)}
+          checkedChildren="dark"
+          unCheckedChildren="light"
         />
       </Col>
     </Row>

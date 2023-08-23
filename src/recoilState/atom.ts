@@ -3,9 +3,9 @@
 // recoil: saves states that are important on client side e.g. selections / dark mode / authentication
 import { atom } from 'recoil';
 
-export const colorScheme = atom({
-  key: 'colorScheme',
-  default: 'light' as string,
+export const darkModeState = atom({
+  key: 'darkModeState',
+  default: false as boolean,
 });
 
 export const searchParamAgencyState = atom({
