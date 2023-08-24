@@ -10,6 +10,7 @@ import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { useRecoilValue } from 'recoil';
 import { darkModeState } from './recoilState/atom';
+import { useTranslation } from 'react-i18next';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -38,6 +39,7 @@ const footerStyle: React.CSSProperties = {
 const App = () => {
   const darkMode = useRecoilValue(darkModeState);
   const currentPage = useLocation();
+  const { t } = useTranslation();
 
   return (
     <ConfigProvider
