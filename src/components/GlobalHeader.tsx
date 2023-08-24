@@ -1,7 +1,7 @@
-import { Col, Image, Menu, Row, Switch } from 'antd';
+import { Col, Image, Menu, Row, Segmented, Switch } from 'antd';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { darkModeState } from '../recoilState/atom';
+import { darkModeState, languageState } from '../recoilState/atom';
 
 const items = [
   {
@@ -20,19 +20,39 @@ const items = [
 
 export const GlobalHeader = () => {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);
+  const [language, setLanguage] = useRecoilState(languageState);
+
+  const handleSegmentedChange = (value: string) => {
+    const updatedLanguages = language.map((item) => {
+      if (item.active === true) {
+        return { ...item, active: false };
+      } else if (item.name === value) {
+        return { ...item, active: true };
+      }
+      return item;
+    });
+
+    setLanguage(updatedLanguages);
+  };
 
   return (
     <Row>
-      <Col span={10}>
+      <Col span={8}>
         <Menu mode="horizontal" defaultSelectedKeys={['1']} items={items} />
       </Col>
-      <Col span={2} offset={10}>
+      <Col span={2} offset={8}>
         <Image
           width={30}
           src="https://loremicon.com/ngon/128/128/261847001528/jpg"
         />
       </Col>
       <Col span={2}>
+        <Segmented
+          options={language.map((lng) => lng.name)}
+          onChange={(value) => handleSegmentedChange(value as string)}
+        />
+      </Col>
+      <Col span={2} offset={2}>
         <Switch
           onChange={() => setDarkMode(!darkMode)}
           checkedChildren="dark"

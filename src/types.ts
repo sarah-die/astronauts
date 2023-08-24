@@ -38,3 +38,9 @@ export interface AgencyDetail {
   info_url?: string;
   image_url?: string;
 }
+
+export type Language = {
+  name: string;
+  abbrev: string;
+  active: boolean;
+};
