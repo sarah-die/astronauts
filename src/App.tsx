@@ -39,7 +39,7 @@ const footerStyle: React.CSSProperties = {
 const App = () => {
   const darkMode = useRecoilValue(darkModeState);
   const currentPage = useLocation();
-  const { t } = useTranslation();
+  const { t } = useTranslation(['ns1']);
 
   return (
     <ConfigProvider
@@ -67,7 +67,7 @@ const App = () => {
               </Affix>
               <Affix offsetTop={300}>
                 <Button>
-                  <Link to="/#top">Top</Link>
+                  <Link to="/#top">{t('upButton')}</Link>
                 </Button>
               </Affix>
             </Sider>

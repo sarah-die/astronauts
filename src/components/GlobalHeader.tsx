@@ -2,6 +2,7 @@ import { Col, Image, Menu, Row, Segmented, Switch } from 'antd';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { darkModeState, languageState } from '../recoilState/atom';
+import { useTranslation } from 'react-i18next';
 
 const items = [
   {
@@ -21,6 +22,7 @@ const items = [
 export const GlobalHeader = () => {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);
   const [language, setLanguage] = useRecoilState(languageState);
+  const { i18n } = useTranslation();
 
   const handleSegmentedChange = (value: string) => {
     const updatedLanguages = language.map((item) => {
@@ -32,6 +34,9 @@ export const GlobalHeader = () => {
       return item;
     });
 
+    // ToDo
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    i18n.changeLanguage(language.find((item) => item.name === value)?.abbrev);
     setLanguage(updatedLanguages);
   };
 

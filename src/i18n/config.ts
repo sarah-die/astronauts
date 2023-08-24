@@ -1,15 +1,15 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import translationEnglish from './translation/English/translation.json';
-import translationGerman from './translation/German/translation.json';
+import enNs1 from './english/enNs1.json';
+import deNs1 from './german/deNs1.json';
 
 const resources = {
   en: {
-    translation: translationEnglish,
+    ns1: enNs1,
   },
   de: {
-    translation: translationGerman,
+    ns1: deNs1,
   },
 };
 
@@ -17,6 +17,7 @@ const resources = {
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 i18next.use(initReactI18next).init({
   debug: true,
+  fallbackLng: 'en',
   resources,
   lng: 'en', // default language
 });
