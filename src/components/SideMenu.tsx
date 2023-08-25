@@ -1,21 +1,24 @@
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
-
-const items = [
-  {
-    label: <Link to="/#active-astronauts">Active Astronauts</Link>,
-    key: '1',
-  },
-  {
-    label: <Link to="/#retired-astronauts">Retired Astronauts</Link>,
-    key: '2',
-  },
-  {
-    label: <Link to="/#currently-in-space">Currently in Space</Link>,
-    key: '3',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 export const SideMenu = () => {
+  const { t } = useTranslation(['layout']);
+
+  const items = [
+    {
+      label: <Link to="/#active-astronauts">{t('active')}</Link>,
+      key: '1',
+    },
+    {
+      label: <Link to="/#retired-astronauts">{t('retired')}</Link>,
+      key: '2',
+    },
+    {
+      label: <Link to="/#currently-in-space">{t('inSpace')}</Link>,
+      key: '3',
+    },
+  ];
+
   return <Menu mode="inline" defaultSelectedKeys={['1']} items={items} />;
 };

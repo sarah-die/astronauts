@@ -5,25 +5,25 @@ import { darkModeState, languageState } from '../recoilState/atom';
 import { useTranslation } from 'react-i18next';
 import { defaultLanguages } from '../i18n/config';
 
-const items = [
-  {
-    label: <Link to="/">Home</Link>,
-    key: '1',
-  },
-  {
-    label: <Link to="/about">About</Link>,
-    key: '2',
-  },
-  {
-    label: <Link to="/contact">Contact</Link>,
-    key: '3',
-  },
-];
-
 export const GlobalHeader = () => {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);
   const [language, setLanguage] = useRecoilState(languageState);
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation(['layout']);
+
+  const items = [
+    {
+      label: <Link to="/">{t('home')}</Link>,
+      key: '1',
+    },
+    {
+      label: <Link to="/about">{t('about')}</Link>,
+      key: '2',
+    },
+    {
+      label: <Link to="/contact">{t('contact')}</Link>,
+      key: '3',
+    },
+  ];
 
   const handleSegmentedChange = (value: string) => {
     const newLngKey =
@@ -58,8 +58,8 @@ export const GlobalHeader = () => {
       <Col span={2} offset={2}>
         <Switch
           onChange={() => setDarkMode(!darkMode)}
-          checkedChildren="dark"
-          unCheckedChildren="light"
+          checkedChildren={t('darkmode')}
+          unCheckedChildren={t('lightmode')}
         />
       </Col>
     </Row>
