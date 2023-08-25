@@ -1,12 +1,12 @@
 import { Button, Table, Typography } from 'antd';
-import { Agency, Astronaut } from '../types';
 import { ColumnProps, TablePaginationConfig } from 'antd/es/table';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   astronautLoadingState,
   searchParamAgencyState,
-} from '../recoilState/atom';
+} from 'src/recoilState/atom';
 import { AgencyModal } from './AgencyModal';
+import { Astronaut, Agency } from 'src/types';
 const { Title } = Typography;
 
 type AstronautTableProps = {

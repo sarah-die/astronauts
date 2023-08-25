@@ -1,9 +1,9 @@
 import { Col, Image, Menu, Row, Segmented, Switch } from 'antd';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { darkModeState, languageState } from '../recoilState/atom';
+import { darkModeState, languageState } from 'src/recoilState/atom';
 import { useTranslation } from 'react-i18next';
-import { defaultLanguages } from '../i18n/config';
+import { defaultLanguages } from 'src/i18n/config';
 
 export const GlobalHeader = () => {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);

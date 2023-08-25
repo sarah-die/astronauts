@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AstronautData } from '../types';
+import { AstronautData } from 'src/types';
 
 const astronautApi = axios.create({
   baseURL: 'https://lldev.thespacedevs.com/2.2.0/astronaut/?limit=100',

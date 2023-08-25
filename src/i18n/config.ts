@@ -4,7 +4,7 @@ import enNs1 from './english/enNs1.json';
 import enLayout from './english/enLayout.json';
 import deNs1 from './german/deNs1.json';
 import deLayout from './german/deLayout.json';
-import { Language } from '../types';
+import { Language } from 'src/types';
 
 export const defaultLanguages: Language[] = [
   { name: 'English', key: 'en', active: true },

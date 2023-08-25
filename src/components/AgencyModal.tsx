@@ -1,9 +1,9 @@
 import { Col, Divider, Image, Modal, Row, Spin, Typography } from 'antd';
 import { useRecoilState } from 'recoil';
-import { searchParamAgencyState } from '../recoilState/atom';
+import { searchParamAgencyState } from 'src/recoilState/atom';
 import { useQuery } from '@tanstack/react-query';
-import { getById } from '../services/agencies';
-import { AgencyDetail } from '../types';
+import { getById } from 'src/services/agencies';
+import { AgencyDetail } from 'src/types';
 import { Link } from 'react-router-dom';
 const { Title, Text } = Typography;
 
