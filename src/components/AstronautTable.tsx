@@ -9,26 +9,31 @@ import {
 import { AgencyModal } from './AgencyModal';
 const { Title } = Typography;
 
-export const AstronautTable = (props: {
+type AstronautTableProps = {
   dataSource: Astronaut[] | undefined;
   dataTitle: string;
-}) => {
+};
+
+export const AstronautTable = ({
+  dataSource,
+  dataTitle,
+}: AstronautTableProps) => {
   const astronautLoading = useRecoilValue(astronautLoadingState);
   const [searchParamAgency, setSearchParamAgency] = useRecoilState(
     searchParamAgencyState,
   );
 
-  const uniqueAgencyProps: string[] = Array.from(
-    new Set(props.dataSource?.map((item) => item.agency.abbrev)),
+  const uniqueAgencyAbbrevs: string[] = Array.from(
+    new Set(dataSource?.map((item) => item.agency.abbrev)),
   );
   const agencyFilters: { text: string; value: string }[] =
-    uniqueAgencyProps.map((item) => ({ text: item, value: item }));
+    uniqueAgencyAbbrevs.map((item) => ({ text: item, value: item }));
 
-  const uniqueNationalityProps: string[] = Array.from(
-    new Set(props.dataSource?.map((item) => item.nationality)),
+  const uniqueNationalities: string[] = Array.from(
+    new Set(dataSource?.map((item) => item.nationality)),
   );
   const nationalityFilters: { text: string; value: string }[] =
-    uniqueNationalityProps.map((item) => ({ text: item, value: item }));
+    uniqueNationalities.map((item) => ({ text: item, value: item }));
 
   const handleAgencyClick = (agencyId: number) => () => {
     setSearchParamAgency(agencyId);
@@ -57,11 +62,7 @@ export const AstronautTable = (props: {
       dataIndex: 'agency',
       key: 'agency',
       render: (agency: Agency) => (
-        <>
-          <Button onClick={handleAgencyClick(agency.id)}>
-            {agency.abbrev}
-          </Button>
-        </>
+        <Button onClick={handleAgencyClick(agency.id)}>{agency.abbrev}</Button>
       ),
       filters: agencyFilters,
       onFilter: (value: string | number | boolean, record: Astronaut) =>
@@ -107,14 +108,14 @@ export const AstronautTable = (props: {
 
   return (
     <>
-      <Title level={3}>{props.dataTitle}</Title>
+      <Title level={3}>{dataTitle}</Title>
       <Table
-        dataSource={props.dataSource}
+        dataSource={dataSource}
         columns={colums}
         pagination={pagination}
         loading={loading}
       ></Table>
-      {searchParamAgency && <AgencyModal></AgencyModal>}
+      {searchParamAgency && <AgencyModal />}
     </>
   );
 };

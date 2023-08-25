@@ -12,12 +12,12 @@ export const AgencyModal = () => {
     searchParamAgencyState,
   );
 
-  const queryAgencies = useQuery({
-    queryKey: ['agencies', searchParamAgency],
+  const queryAgency = useQuery({
+    queryKey: ['agency', searchParamAgency],
     queryFn: () => getById(searchParamAgency),
   });
 
-  const agency: AgencyDetail = queryAgencies.data || {};
+  const agency: AgencyDetail = queryAgency.data || {};
 
   return (
     <>
@@ -28,7 +28,7 @@ export const AgencyModal = () => {
         onCancel={() => setSearchParamAgency(null)}
         footer={null}
       >
-        {queryAgencies.status === 'loading' ? (
+        {queryAgency.status === 'loading' ? (
           <Row justify="center">
             <Spin />
           </Row>
@@ -43,17 +43,17 @@ export const AgencyModal = () => {
                 <Image width={150} src={agency.logo_url} />
               </Col>
             </Row>
-            <Divider></Divider>
+            <Divider />
             <Text>{agency.description}</Text>
             {agency.image_url !== null && (
               <>
-                <Divider></Divider>
+                <Divider />
                 <Row justify="center">
                   <Image width={300} src={agency.image_url} />
                 </Row>
               </>
             )}
-            <Divider></Divider>
+            <Divider />
             <Text>
               Click <Link to={agency.info_url || ''}>here</Link> for more
               information.
