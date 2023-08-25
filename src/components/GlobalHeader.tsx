@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { darkModeState, languageState } from '../recoilState/atom';
 import { useTranslation } from 'react-i18next';
+import { defaultLanguages } from '../i18n/config';
 
 const items = [
   {
@@ -25,19 +26,13 @@ export const GlobalHeader = () => {
   const { i18n } = useTranslation();
 
   const handleSegmentedChange = (value: string) => {
-    const updatedLanguages = language.map((item) => {
-      if (item.active === true) {
-        return { ...item, active: false };
-      } else if (item.name === value) {
-        return { ...item, active: true };
-      }
-      return item;
-    });
+    const newLngKey =
+      defaultLanguages.find((item) => item.name === value)?.key || 'en';
 
     // ToDo
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    i18n.changeLanguage(language.find((item) => item.name === value)?.abbrev);
-    setLanguage(updatedLanguages);
+    i18n.changeLanguage(newLngKey);
+    setLanguage(newLngKey);
   };
 
   return (
@@ -53,7 +48,10 @@ export const GlobalHeader = () => {
       </Col>
       <Col span={2}>
         <Segmented
-          options={language.map((lng) => lng.name)}
+          options={defaultLanguages.map((lng) => lng.name)}
+          defaultValue={
+            defaultLanguages.find((lng) => lng.key === language)?.name
+          }
           onChange={(value) => handleSegmentedChange(value as string)}
         />
       </Col>

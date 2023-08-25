@@ -41,6 +41,6 @@ export interface AgencyDetail {
 
 export type Language = {
   name: string;
-  abbrev: string;
+  key: string;
   active: boolean;
 };
