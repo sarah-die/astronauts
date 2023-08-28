@@ -1,21 +1,11 @@
-import { useMemo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const ScrollToHashElement = () => {
   const location = useLocation();
 
-  const locationKey = useMemo(() => {
-    const hash = location.hash;
-
-    if (hash) {
-      const key = location.key;
-      return key;
-    } else {
-      return null;
-    }
-  }, [location]);
-
-  const hashElement = useMemo(() => {
+  // https://stackoverflow.com/questions/24665602/scrollintoview-scrolls-just-too-far
+  useEffect(() => {
     const hash = location.hash;
 
     const removeHashCharacter = (str: string) => {
@@ -25,23 +15,14 @@ const ScrollToHashElement = () => {
 
     if (hash) {
       const element = document.getElementById(removeHashCharacter(hash));
-      return element;
-    } else {
-      return null;
+      const yOffset = -70;
+      if (element) {
+        const y =
+          element.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }
   }, [location]);
-
-  useEffect(() => {
-    console.log('useEffect triggered');
-
-    if (hashElement) {
-      hashElement.scrollIntoView({
-        behavior: 'smooth',
-        // block: "end",
-        inline: 'nearest',
-      });
-    }
-  }, [hashElement, locationKey]);
 
   return null;
 };

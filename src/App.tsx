@@ -1,6 +1,6 @@
 import './App.css';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Affix, Button, ConfigProvider, Layout, theme } from 'antd';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { ConfigProvider, Layout, theme } from 'antd';
 import { GlobalFooter } from './components/GlobalFooter';
 import { GlobalHeader } from './components/GlobalHeader';
 import { SideMenu } from './components/SideMenu';
@@ -10,7 +10,6 @@ import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { useRecoilValue } from 'recoil';
 import { darkModeState } from './recoilState/atom';
-import { useTranslation } from 'react-i18next';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -19,17 +18,22 @@ const headerStyle: React.CSSProperties = {
   height: 64,
   paddingInline: 50,
   lineHeight: '64px',
+  position: 'sticky',
+  top: 0,
+  width: '100%',
+  zIndex: 999,
 };
 
 const contentStyle: React.CSSProperties = {
   textAlign: 'center',
   minHeight: 120,
-  // lineHeight: '120px',
+  marginLeft: 200,
 };
 
 const siderStyle: React.CSSProperties = {
   textAlign: 'center',
-  lineHeight: '120px',
+  position: 'fixed',
+  height: '100%',
 };
 
 const footerStyle: React.CSSProperties = {
@@ -39,7 +43,6 @@ const footerStyle: React.CSSProperties = {
 const App = () => {
   const darkMode = useRecoilValue(darkModeState);
   const currentPage = useLocation();
-  const { t } = useTranslation(['ns1']);
 
   return (
     <ConfigProvider
@@ -54,22 +57,13 @@ const App = () => {
     >
       <Layout>
         <ScrollToHashElement />
-        <section id="top">
-          <Header style={headerStyle}>
-            <GlobalHeader />
-          </Header>
-        </section>
+        <Header style={headerStyle}>
+          <GlobalHeader />
+        </Header>
         <Layout hasSider>
           {currentPage.pathname === '/' ? (
             <Sider style={siderStyle}>
-              <Affix offsetTop={30}>
-                <SideMenu />
-              </Affix>
-              <Affix offsetTop={300}>
-                <Button>
-                  <Link to="/#top">{t('upButton')}</Link>
-                </Button>
-              </Affix>
+              <SideMenu />
             </Sider>
           ) : (
             <></>
@@ -77,7 +71,6 @@ const App = () => {
           <Content style={contentStyle}>
             <Routes>
               <Route path="/" element={<Home />} />
-              {/* <Route path="/astronaut/:id" element={<div></div>} /> */}
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
