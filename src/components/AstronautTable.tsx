@@ -48,6 +48,8 @@ export const AstronautTable = ({
       sorter: {
         compare: (a: Astronaut, b: Astronaut) => a.name.localeCompare(b.name),
       },
+      fixed: 'left',
+      width: 70,
     },
     {
       title: 'Age',
@@ -56,6 +58,7 @@ export const AstronautTable = ({
       sorter: {
         compare: (a: Astronaut, b: Astronaut) => a.age - b.age,
       },
+      width: 30,
     },
     {
       title: 'Agency',
@@ -67,6 +70,7 @@ export const AstronautTable = ({
       filters: agencyFilters,
       onFilter: (value: string | number | boolean, record: Astronaut) =>
         record.agency.abbrev.indexOf(value.toString()) === 0,
+      width: 70,
     },
     {
       title: 'Nationality',
@@ -75,6 +79,7 @@ export const AstronautTable = ({
       filters: nationalityFilters,
       onFilter: (value: string | number | boolean, record: Astronaut) =>
         record.nationality.indexOf(value.toString()) === 0,
+      width: 70,
     },
     {
       title: 'Flights Count',
@@ -84,6 +89,7 @@ export const AstronautTable = ({
         compare: (a: Astronaut, b: Astronaut) =>
           a.flights_count - b.flights_count,
       },
+      width: 30,
     },
     {
       title: 'Spacewalks Count',
@@ -93,6 +99,7 @@ export const AstronautTable = ({
         compare: (a: Astronaut, b: Astronaut) =>
           a.spacewalks_count - b.spacewalks_count,
       },
+      width: 30,
     },
   ];
 
@@ -114,6 +121,9 @@ export const AstronautTable = ({
         columns={colums}
         pagination={pagination}
         loading={loading}
+        scroll={{
+          x: 'max-content',
+        }}
       ></Table>
       {searchParamAgency && <AgencyModal />}
     </>
