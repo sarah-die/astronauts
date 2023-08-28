@@ -27,7 +27,6 @@ const headerStyle: React.CSSProperties = {
 const contentStyle: React.CSSProperties = {
   textAlign: 'center',
   minHeight: 120,
-  marginLeft: 200,
 };
 
 const siderStyle: React.CSSProperties = {
@@ -38,6 +37,7 @@ const siderStyle: React.CSSProperties = {
 
 const footerStyle: React.CSSProperties = {
   textAlign: 'center',
+  zIndex: 999,
 };
 
 const App = () => {
@@ -68,7 +68,12 @@ const App = () => {
           ) : (
             <></>
           )}
-          <Content style={contentStyle}>
+          <Content
+            style={{
+              ...contentStyle,
+              marginLeft: currentPage.pathname === '/' ? 200 : 0,
+            }}
+          >
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
