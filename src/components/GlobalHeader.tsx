@@ -17,41 +17,24 @@ export const GlobalHeader = () => {
   const { i18n, t } = useTranslation(['layout']);
   const location = useLocation();
 
-  console.log('curr', currPath);
-
   const items = [
     {
       label: <Link to="/">{t('home')}</Link>,
-      key: '1',
+      key: '',
     },
     {
       label: <Link to="/about">{t('about')}</Link>,
-      key: '2',
+      key: 'about',
     },
     {
       label: <Link to="/contact">{t('contact')}</Link>,
-      key: '3',
+      key: 'contact',
     },
   ];
 
   useEffect(() => {
     const path = location.pathname.slice(1);
-
-    switch (path) {
-      case '':
-        setCurrPath('1');
-        break;
-      case 'about':
-        setCurrPath('2');
-        break;
-      case 'contact':
-        setCurrPath('3');
-        break;
-      default:
-        break;
-    }
-
-    console.log('path', path);
+    setCurrPath(path);
   }, [location]);
 
   const handleSegmentedChange = (value: string) => {
@@ -70,7 +53,7 @@ export const GlobalHeader = () => {
         <Menu
           mode="horizontal"
           selectedKeys={[currPath]}
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={['']}
           items={items}
         />
       </Col>
