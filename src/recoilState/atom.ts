@@ -22,3 +22,8 @@ export const languageState = atom({
   key: 'languageState',
   default: 'en',
 });
+
+export const currPathState = atom({
+  key: 'currPathState',
+  default: '' as string,
+});

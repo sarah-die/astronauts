@@ -1,14 +1,23 @@
 import { Col, Image, Menu, Row, Segmented, Switch } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { darkModeState, languageState } from 'src/recoilState/atom';
+import {
+  darkModeState,
+  languageState,
+  currPathState,
+} from 'src/recoilState/atom';
 import { useTranslation } from 'react-i18next';
 import { defaultLanguages } from 'src/i18n/config';
+import { useEffect } from 'react';
 
 export const GlobalHeader = () => {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);
   const [language, setLanguage] = useRecoilState(languageState);
+  const [currPath, setCurrPath] = useRecoilState(currPathState);
   const { i18n, t } = useTranslation(['layout']);
+  const location = useLocation();
+
+  console.log('curr', currPath);
 
   const items = [
     {
@@ -25,6 +34,26 @@ export const GlobalHeader = () => {
     },
   ];
 
+  useEffect(() => {
+    const path = location.pathname.slice(1);
+
+    switch (path) {
+      case '':
+        setCurrPath('1');
+        break;
+      case 'about':
+        setCurrPath('2');
+        break;
+      case 'contact':
+        setCurrPath('3');
+        break;
+      default:
+        break;
+    }
+
+    console.log('path', path);
+  }, [location]);
+
   const handleSegmentedChange = (value: string) => {
     const newLngKey =
       defaultLanguages.find((item) => item.name === value)?.key || 'en';
@@ -38,7 +67,12 @@ export const GlobalHeader = () => {
   return (
     <Row>
       <Col span={8}>
-        <Menu mode="horizontal" defaultSelectedKeys={['1']} items={items} />
+        <Menu
+          mode="horizontal"
+          selectedKeys={[currPath]}
+          defaultSelectedKeys={['1']}
+          items={items}
+        />
       </Col>
       <Col span={2} offset={8}>
         <Image
