@@ -4,9 +4,9 @@ import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   astronautLoadingState,
   searchParamAgencyState,
-} from 'src/recoilState/atom';
+} from 'recoilState/atom';
 import { AgencyModal } from './AgencyModal';
-import { Astronaut, Agency } from 'src/types';
+import { Astronaut, Agency } from 'types';
 const { Title } = Typography;
 
 type AstronautTableProps = {

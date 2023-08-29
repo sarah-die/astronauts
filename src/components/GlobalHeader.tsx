@@ -1,13 +1,9 @@
 import { Col, Image, Menu, Row, Segmented, Switch } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import {
-  darkModeState,
-  languageState,
-  currPathState,
-} from 'src/recoilState/atom';
+import { darkModeState, languageState, currPathState } from 'recoilState/atom';
 import { useTranslation } from 'react-i18next';
-import { defaultLanguages } from 'src/i18n/config';
+import { defaultLanguages } from 'locale/config';
 import { useEffect } from 'react';
 
 export const GlobalHeader = () => {

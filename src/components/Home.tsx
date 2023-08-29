@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAll } from 'src/services/astronauts';
-import { Astronaut } from 'src/types';
+import { getAll } from 'services/astronauts';
+import { Astronaut } from 'types';
 import { AstronautTable } from './AstronautTable';
 import { Col, Row } from 'antd';
 import { useSetRecoilState } from 'recoil';
-import { astronautLoadingState } from 'src/recoilState/atom';
+import { astronautLoadingState } from 'recoilState/atom';
 
 export const Home = () => {
   const setAstronautLoading = useSetRecoilState(astronautLoadingState);
@@ -18,7 +18,7 @@ export const Home = () => {
   });
 
   const myData: Astronaut[] =
-    queryAstronauts.data?.results?.map((item) => ({
+    queryAstronauts.data?.results?.map((item: Astronaut) => ({
       ...item,
       key: `key-${item.id}`,
     })) || [];

@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "."
+    "baseUrl": "src"
   },
-  "include": ["src"]
+  "include": ["./src/**/*", "typings/**/*.d.ts"],
+  "exclude": ["./node_modules", "./public", "./.vscode"]
 }

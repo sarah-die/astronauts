@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AgencyDetail } from 'src/types';
+import { AgencyDetail } from 'types';
 
 const agencyApi = axios.create({
   baseURL: 'https://lldev.thespacedevs.com/2.2.0/agencies/',

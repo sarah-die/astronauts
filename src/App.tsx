@@ -1,15 +1,15 @@
 import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { ConfigProvider, Layout, theme } from 'antd';
-import { GlobalFooter } from './components/GlobalFooter';
-import { GlobalHeader } from './components/GlobalHeader';
-import { SideMenu } from './components/SideMenu';
-import { Home } from './components/Home';
-import ScrollToHashElement from './components/ScrollToHashElement';
-import { About } from './components/About';
-import { Contact } from './components/Contact';
+import { GlobalFooter } from 'components/GlobalFooter';
+import { GlobalHeader } from 'components/GlobalHeader';
+import { SideMenu } from 'components/SideMenu';
+import { Home } from 'components/Home';
+import ScrollToHashElement from 'components/ScrollToHashElement';
+import { About } from 'components/About';
+import { Contact } from 'components/Contact';
 import { useRecoilValue } from 'recoil';
-import { darkModeState } from './recoilState/atom';
+import { darkModeState } from 'recoilState/atom';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -62,7 +62,14 @@ const App = () => {
         </Header>
         <Layout hasSider>
           {currentPage.pathname === '/' ? (
-            <Sider style={siderStyle}>
+            <Sider
+              style={{
+                ...siderStyle,
+                border: 'solid',
+                borderWidth: 2,
+                borderColor: 'red',
+              }}
+            >
               <SideMenu />
             </Sider>
           ) : (

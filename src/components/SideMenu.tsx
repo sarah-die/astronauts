@@ -20,5 +20,15 @@ export const SideMenu = () => {
     },
   ];
 
-  return <Menu mode="inline" defaultSelectedKeys={['1']} items={items} />;
+  return (
+    <div
+      style={{
+        border: 'solid',
+        borderWidth: 2,
+        borderColor: 'green',
+      }}
+    >
+      <Menu mode="inline" defaultSelectedKeys={['1']} items={items} />
+    </div>
+  );
 };
