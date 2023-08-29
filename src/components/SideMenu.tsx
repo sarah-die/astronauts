@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export const SideMenu = () => {
-  const { t } = useTranslation(['layout']);
+  const { i18n } = useTranslation();
 
   const items = [
     {
-      label: <Link to="/#active-astronauts">{t('active')}</Link>,
+      label: <Link to="/#active-astronauts">{i18n.t('active')}</Link>,
       key: '1',
     },
     {
-      label: <Link to="/#retired-astronauts">{t('retired')}</Link>,
+      label: <Link to="/#retired-astronauts">{i18n.t('retired')}</Link>,
       key: '2',
     },
     {
-      label: <Link to="/#currently-in-space">{t('inSpace')}</Link>,
+      label: <Link to="/#currently-in-space">{i18n.t('inSpace')}</Link>,
       key: '3',
     },
   ];

@@ -10,20 +10,20 @@ export const GlobalHeader = () => {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);
   const [language, setLanguage] = useRecoilState(languageState);
   const [currPath, setCurrPath] = useRecoilState(currPathState);
-  const { i18n, t } = useTranslation(['layout']);
+  const { i18n } = useTranslation();
   const location = useLocation();
 
   const items = [
     {
-      label: <Link to="/">{t('home')}</Link>,
+      label: <Link to="/">{i18n.t('home')}</Link>,
       key: '',
     },
     {
-      label: <Link to="/about">{t('about')}</Link>,
+      label: <Link to="/about">{i18n.t('about')}</Link>,
       key: 'about',
     },
     {
-      label: <Link to="/contact">{t('contact')}</Link>,
+      label: <Link to="/contact">{i18n.t('contact')}</Link>,
       key: 'contact',
     },
   ];
@@ -71,8 +71,8 @@ export const GlobalHeader = () => {
       <Col span={2} offset={2}>
         <Switch
           onChange={() => setDarkMode(!darkMode)}
-          checkedChildren={t('darkmode')}
-          unCheckedChildren={t('lightmode')}
+          checkedChildren={i18n.t('darkmode')}
+          unCheckedChildren={i18n.t('lightmode')}
         />
       </Col>
     </Row>
