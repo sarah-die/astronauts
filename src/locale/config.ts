@@ -1,9 +1,7 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import enNs1 from './en/enNs1.json';
-import enLayout from './en/enLayout.json';
-import deNs1 from './de/deNs1.json';
-import deLayout from './de/deLayout.json';
+import enTranslation from './en/translation.json';
+import deTranslation from './de/translation.json';
 import { Language } from 'types';
 
 export const defaultLanguages: Language[] = [
@@ -13,22 +11,27 @@ export const defaultLanguages: Language[] = [
 
 const resources = {
   en: {
-    ns1: enNs1,
-    layout: enLayout,
+    translation: enTranslation,
   },
   de: {
-    ns1: deNs1,
-    layout: deLayout,
+    translation: deTranslation,
   },
 };
 
 // ToDo
+// https://medium.com/geekculture/strong-typed-i18n-in-react-c43281de720c
+// https://locize.com/blog/i18next-typescript/
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 i18next.use(initReactI18next).init({
+  returnNull: false,
   debug: true,
   fallbackLng: 'en',
   resources,
+  defaultNS: 'translation',
   lng: 'en', // default language
+  interpolation: {
+    escapeValue: false,
+  },
 });
 
 export default i18next;
