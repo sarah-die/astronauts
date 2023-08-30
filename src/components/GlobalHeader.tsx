@@ -44,37 +44,53 @@ export const GlobalHeader = () => {
   };
 
   return (
-    <Row>
-      <Col span={8}>
-        <Menu
-          mode="horizontal"
-          selectedKeys={[currPath]}
-          defaultSelectedKeys={['']}
-          items={items}
-        />
-      </Col>
-      <Col span={2} offset={8}>
-        <Image
-          width={30}
-          src="https://loremicon.com/ngon/128/128/261847001528/jpg"
-        />
-      </Col>
-      <Col span={2}>
-        <Segmented
-          options={defaultLanguages.map((lng) => lng.name)}
-          defaultValue={
-            defaultLanguages.find((lng) => lng.key === language)?.name
-          }
-          onChange={(value) => handleSegmentedChange(value as string)}
-        />
-      </Col>
-      <Col span={2} offset={2}>
-        <Switch
-          onChange={() => setDarkMode(!darkMode)}
-          checkedChildren={i18n.t('darkmode')}
-          unCheckedChildren={i18n.t('lightmode')}
-        />
-      </Col>
-    </Row>
+    <>
+      <Row
+        style={{
+          height: '55px',
+          lineHeight: '55px',
+          borderBottom: '0.3px solid #F0F0F0',
+        }}
+      >
+        <Col span={20}>
+          <Row>
+            <Col span={20}>
+              <Menu
+                style={{ borderBottom: '0.3px solid #F0F0F0' }}
+                mode="horizontal"
+                selectedKeys={[currPath]}
+                defaultSelectedKeys={['']}
+                items={items}
+              />
+            </Col>
+          </Row>
+        </Col>
+        <Col span={4}>
+          <Image
+            width={30}
+            src="https://loremicon.com/ngon/128/128/261847001528/jpg"
+          />
+        </Col>
+      </Row>
+      <Row justify="end" style={{ height: '35px', lineHeight: '35px' }}>
+        <Col xs={8} md={5} lg={3}>
+          <Segmented
+            size="small"
+            options={defaultLanguages.map((lng) => lng.name)}
+            defaultValue={
+              defaultLanguages.find((lng) => lng.key === language)?.name
+            }
+            onChange={(value) => handleSegmentedChange(value as string)}
+          />
+        </Col>
+        <Col xs={8} md={5} lg={3}>
+          <Switch
+            onChange={() => setDarkMode(!darkMode)}
+            checkedChildren={i18n.t('darkmode')}
+            unCheckedChildren={i18n.t('lightmode')}
+          />
+        </Col>
+      </Row>
+    </>
   );
 };

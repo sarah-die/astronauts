@@ -1,4 +1,4 @@
-import { Menu } from 'antd';
+import { Menu, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -21,14 +21,8 @@ export const SideMenu = () => {
   ];
 
   return (
-    <div
-      style={{
-        border: 'solid',
-        borderWidth: 2,
-        borderColor: 'green',
-      }}
-    >
+    <Row>
       <Menu mode="inline" defaultSelectedKeys={['1']} items={items} />
-    </div>
+    </Row>
   );
 };

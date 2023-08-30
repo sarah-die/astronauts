@@ -15,9 +15,8 @@ const { Header, Footer, Sider, Content } = Layout;
 
 const headerStyle: React.CSSProperties = {
   textAlign: 'center',
-  height: 64,
+  height: 90,
   paddingInline: 50,
-  lineHeight: '64px',
   position: 'sticky',
   top: 0,
   width: '100%',
@@ -32,12 +31,12 @@ const contentStyle: React.CSSProperties = {
 const siderStyle: React.CSSProperties = {
   textAlign: 'center',
   position: 'fixed',
-  height: '100%',
+  height: 'calc(100vh - 90px - 64px)',
 };
 
 const footerStyle: React.CSSProperties = {
   textAlign: 'center',
-  zIndex: 999,
+  height: 64,
 };
 
 const App = () => {
@@ -62,14 +61,7 @@ const App = () => {
         </Header>
         <Layout hasSider>
           {currentPage.pathname === '/' ? (
-            <Sider
-              style={{
-                ...siderStyle,
-                border: 'solid',
-                borderWidth: 2,
-                borderColor: 'red',
-              }}
-            >
+            <Sider style={siderStyle}>
               <SideMenu />
             </Sider>
           ) : (
