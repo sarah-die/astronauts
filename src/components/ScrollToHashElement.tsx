@@ -15,7 +15,7 @@ const ScrollToHashElement = () => {
 
     if (hash) {
       const element = document.getElementById(removeHashCharacter(hash));
-      const yOffset = -70;
+      const yOffset = -100;
       if (element) {
         const y =
           element.getBoundingClientRect().top + window.scrollY + yOffset;
