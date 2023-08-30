@@ -10,6 +10,8 @@ import { About } from 'components/About';
 import { Contact } from 'components/Contact';
 import { useRecoilValue } from 'recoil';
 import { darkModeState } from 'recoilState/atom';
+import { useRef } from 'react';
+import { useIsVisible } from 'hooks/useIsVisible';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -31,7 +33,6 @@ const contentStyle: React.CSSProperties = {
 const siderStyle: React.CSSProperties = {
   textAlign: 'center',
   position: 'fixed',
-  height: 'calc(100vh - 90px - 64px)',
 };
 
 const footerStyle: React.CSSProperties = {
@@ -42,6 +43,8 @@ const footerStyle: React.CSSProperties = {
 const App = () => {
   const darkMode = useRecoilValue(darkModeState);
   const currentPage = useLocation();
+  const footerRef = useRef<HTMLElement>(null);
+  const footerIsVisible = useIsVisible(footerRef);
 
   return (
     <ConfigProvider
@@ -61,7 +64,14 @@ const App = () => {
         </Header>
         <Layout hasSider>
           {currentPage.pathname === '/' ? (
-            <Sider style={siderStyle}>
+            <Sider
+              style={{
+                ...siderStyle,
+                height: footerIsVisible
+                  ? 'calc(100vh - 90px - 64px)'
+                  : 'calc(100vh - 90px)',
+              }}
+            >
               <SideMenu />
             </Sider>
           ) : (
@@ -80,7 +90,7 @@ const App = () => {
             </Routes>
           </Content>
         </Layout>
-        <Footer style={footerStyle}>
+        <Footer style={footerStyle} ref={footerRef}>
           <GlobalFooter />
         </Footer>
       </Layout>
