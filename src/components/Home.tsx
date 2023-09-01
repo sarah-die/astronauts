@@ -1,21 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import { getAll } from 'services/astronauts';
 import { Astronaut } from 'types';
 import { AstronautTable } from './AstronautTable';
 import { Col, Row } from 'antd';
-import { useSetRecoilState } from 'recoil';
-import { astronautLoadingState } from 'recoilState/atom';
+import { useAstronautData } from 'hooks/apiFetches/useAstronautData';
 
 export const Home = () => {
-  const setAstronautLoading = useSetRecoilState(astronautLoadingState);
-
-  const queryAstronauts = useQuery({
-    queryKey: ['astronauts'],
-    queryFn: getAll,
-    onSuccess: () => {
-      setAstronautLoading(false);
-    },
-  });
+  const queryAstronauts = useAstronautData();
 
   const myData: Astronaut[] =
     queryAstronauts.data?.results?.map((item: Astronaut) => ({
