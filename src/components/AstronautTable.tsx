@@ -83,7 +83,7 @@ export const AstronautTable = ({
       ),
       filters: agencyFilters,
       onFilter: (value: string | number | boolean, record: Astronaut) =>
-        record.agency.abbrev.indexOf(value.toString()) === 0,
+        record.agency.abbrev.startsWith(value.toString()),
       width: 70,
     },
     {
@@ -92,7 +92,7 @@ export const AstronautTable = ({
       key: 'nationality',
       filters: nationalityFilters,
       onFilter: (value: string | number | boolean, record: Astronaut) =>
-        record.nationality.indexOf(value.toString()) === 0,
+        record.nationality.startsWith(value.toString()),
       width: 70,
     },
     {
