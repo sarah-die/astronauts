@@ -9,9 +9,11 @@ import ScrollToHashElement from 'components/ScrollToHashElement';
 import { About } from 'components/About';
 import { Contact } from 'components/Contact';
 import { useRecoilValue } from 'recoil';
-import { darkModeState } from 'recoilState/atom';
+import { darkModeState, languageState } from 'recoilState/atom';
 import { useRef } from 'react';
 import { useIsVisible } from 'hooks/useIsVisible';
+import de from 'antd/locale/de_DE';
+import en from 'antd/locale/en_US';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -45,6 +47,7 @@ const App = () => {
   const currentPage = useLocation();
   const footerRef = useRef<HTMLElement>(null);
   const footerIsVisible = useIsVisible(footerRef);
+  const language = useRecoilValue(languageState);
 
   return (
     <ConfigProvider
@@ -56,6 +59,7 @@ const App = () => {
           },
         },
       }}
+      locale={language === 'en' ? en : de}
     >
       <Layout>
         <ScrollToHashElement />
