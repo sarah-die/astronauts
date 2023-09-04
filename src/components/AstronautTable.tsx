@@ -42,7 +42,7 @@ export const AstronautTable = ({
 
   const handleAstronautClick = (astronautName: string) => () => {
     const astronautId =
-      dataSource?.find((el) => el.name === astronautName)?.id || null;
+      dataSource?.find((el) => el.name === astronautName)?.id ?? null;
     setCurrentAstronautId(astronautId);
   };
 

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Col, Divider, Image, Modal, Row, Spin, Typography } from 'antd';
+import { format, parse } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { currentAstronautIdState } from 'recoilState/atom';
@@ -20,8 +21,6 @@ export const AstronautModal = () => {
 
   const astronaut: Astronaut | null = queryAstronautById.data ?? null;
 
-  // if (!astronaut) return null;
-
   return (
     <Modal
       title={astronaut?.name}
@@ -35,10 +34,17 @@ export const AstronautModal = () => {
           <Spin />
         </Row>
       ) : (
-        <Row gutter={15}>
+        <Row gutter={15} justify="start">
           <Col span={14}>
             <Title level={4}>{astronaut.name}</Title>
-            <Text>Born on {astronaut.date_of_birth}</Text>
+            <Text style={{ display: 'block' }}>
+              Born on{' '}
+              {format(
+                parse(astronaut.date_of_birth, 'yyyy-MM-dd', new Date()),
+                'dd.MM.yyyy',
+              )}
+            </Text>
+            {'\n'}
             <Text>Age: {astronaut.age} years</Text>
           </Col>
           <Col span={10}>
