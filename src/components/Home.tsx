@@ -2,15 +2,17 @@ import { Astronaut } from 'types';
 import { AstronautTable } from './AstronautTable';
 import { Col, Row } from 'antd';
 import { useAstronautData } from 'hooks/apiFetches/useAstronautData';
+import { useTranslation } from 'react-i18next';
 
 export const Home = () => {
   const queryAstronauts = useAstronautData();
+  const { t } = useTranslation();
 
   const myData: Astronaut[] =
     queryAstronauts.data?.results?.map((item: Astronaut) => ({
       ...item,
       key: `key-${item.id}`,
-    })) || [];
+    })) ?? [];
 
   const activeAstronauts = myData.filter(
     (item) => item.status.name === 'Active',
@@ -28,7 +30,7 @@ export const Home = () => {
         <section id="active-astronauts">
           <AstronautTable
             dataSource={activeAstronauts}
-            dataTitle="Active Astronauts"
+            dataTitle={t('t_title_1')}
           />
         </section>
       </Col>
@@ -36,7 +38,7 @@ export const Home = () => {
         <section id="retired-astronauts">
           <AstronautTable
             dataSource={retiredAstronauts}
-            dataTitle="Retired Astronauts"
+            dataTitle={t('t_title_2')}
           />
         </section>
       </Col>
@@ -44,7 +46,7 @@ export const Home = () => {
         <section id="currently-in-space">
           <AstronautTable
             dataSource={currentlyInSpace}
-            dataTitle="Currently in Space"
+            dataTitle={t('t_title_3')}
           />
         </section>
       </Col>

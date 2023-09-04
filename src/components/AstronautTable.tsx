@@ -9,6 +9,7 @@ import {
 import { AgencyModal } from './AgencyModal';
 import { Astronaut, Agency } from 'types';
 import { AstronautModal } from './AstronautModal';
+import { useTranslation } from 'react-i18next';
 const { Title } = Typography;
 
 type AstronautTableProps = {
@@ -27,6 +28,8 @@ export const AstronautTable = ({
   const [currentAstronautId, setCurrentAstronautId] = useRecoilState(
     currentAstronautIdState,
   );
+
+  const { t } = useTranslation();
 
   const uniqueAgencyAbbrevs: string[] = Array.from(
     new Set(dataSource?.map((item) => item.agency.abbrev)),
@@ -52,7 +55,7 @@ export const AstronautTable = ({
 
   const colums: ColumnProps<Astronaut>[] = [
     {
-      title: 'Name',
+      title: t('t_name'),
       dataIndex: 'name',
       key: 'name',
       defaultSortOrder: 'ascend',
@@ -66,7 +69,7 @@ export const AstronautTable = ({
       width: 70,
     },
     {
-      title: 'Age',
+      title: t('t_age'),
       dataIndex: 'age',
       key: 'age',
       sorter: {
@@ -75,7 +78,7 @@ export const AstronautTable = ({
       width: 30,
     },
     {
-      title: 'Agency',
+      title: t('t_agency'),
       dataIndex: 'agency',
       key: 'agency',
       render: (agency: Agency) => (
@@ -87,7 +90,7 @@ export const AstronautTable = ({
       width: 70,
     },
     {
-      title: 'Nationality',
+      title: t('t_nationality'),
       dataIndex: 'nationality',
       key: 'nationality',
       filters: nationalityFilters,
@@ -96,7 +99,7 @@ export const AstronautTable = ({
       width: 70,
     },
     {
-      title: 'Flights Count',
+      title: t('t_flights_count'),
       dataIndex: 'flights_count',
       key: 'flights_count',
       sorter: {
@@ -106,7 +109,7 @@ export const AstronautTable = ({
       width: 30,
     },
     {
-      title: 'Spacewalks Count',
+      title: t('t_spacewalks_count'),
       dataIndex: 'spacewalks_count',
       key: 'spacewalks_count',
       sorter: {

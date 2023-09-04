@@ -5,12 +5,15 @@ import { useQuery } from '@tanstack/react-query';
 import { getById } from 'services/agencies';
 import { AgencyDetail } from 'types';
 import { Link } from 'react-router-dom';
+import { Trans, useTranslation } from 'react-i18next';
 const { Title, Text } = Typography;
 
 export const AgencyModal = () => {
   const [searchParamAgency, setSearchParamAgency] = useRecoilState(
     searchParamAgencyState,
   );
+
+  const { t } = useTranslation();
 
   const queryAgency = useQuery({
     queryKey: ['agency', searchParamAgency],
@@ -36,7 +39,9 @@ export const AgencyModal = () => {
           <Row gutter={15}>
             <Col span={14}>
               <Title level={4}>{agency.name}</Title>
-              <Text>Founded in {agency.founding_year}</Text>
+              <Text>
+                {t('founding_year')} {agency.founding_year}
+              </Text>
             </Col>
             <Col span={10}>
               <Image width={150} src={agency.logo_url} />
@@ -54,8 +59,13 @@ export const AgencyModal = () => {
           )}
           <Divider />
           <Text>
-            Click <Link to={agency.info_url || ''}>here</Link> for more
-            information.
+            <Trans
+              i18nKey="agency_more_info"
+              t={t}
+              components={[
+                <Link to={agency.info_url || ''} key={agency.abbrev} />,
+              ]}
+            />
           </Text>
         </>
       )}

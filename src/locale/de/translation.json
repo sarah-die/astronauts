@@ -7,5 +7,29 @@
   "active": "Aktive Astronauten",
   "retired": "Pensionierte Astronauten",
   "inSpace": "Zurzeit im Weltraum",
-  "upButton": "Nach oben"
+  "upButton": "Nach oben",
+
+  "t_title_1": "Aktive Astronauten",
+  "t_title_2": "Pensionierte Astronauten",
+  "t_title_3": "Zurzeit im Weltraum",
+  "t_name": "Name",
+  "t_age": "Alter",
+  "t_agency": "Agentur",
+  "t_nationality": "Nationalität",
+  "t_flights_count": "Anzahl Flüge",
+  "t_spacewalks_count": "Anzahl Weltraum- spaziergänge",
+
+  "founding_year": "Gründungsjahr: ",
+  "agency_more_info": "Klicken Sie <0>hier</0> für weitere Informationen.",
+
+  "birthday": "Geboren am ",
+  "age": "Alter: {{years}} Jahre",
+  "astronaut_more_info": "Klicken Sie <0>hier</0> für weitere Informationen.",
+
+  "about_title": "Über uns",
+  "about_text_1": "Dieses Projekt habe ich im Rahmen eines Praktikums umgesetzt. Dabei lag der primäre Fokus darauf neue Technologien zu verstehen und anzuwenden. Verwendet wurde beispielsweise React, TypeScript, React-Router, Ant Design, i18next und Recoil.",
+  "about_text_2": "Vielen Dank an das Team von \"Launch Library 2\" für die bereitgestellten Daten! :)",
+  "contact_title": "Kontakt",
+
+  "footer": "Astronauten-Projekt 2023"
 }

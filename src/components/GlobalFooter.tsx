@@ -1,6 +1,9 @@
 import { Typography } from 'antd';
+import { useTranslation } from 'react-i18next';
 const { Text } = Typography;
 
 export const GlobalFooter = () => {
-  return <Text>Astronaut-Project 2023</Text>;
+  const { t } = useTranslation();
+
+  return <Text>{t('footer')}</Text>;
 };

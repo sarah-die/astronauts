@@ -7,5 +7,29 @@
   "active": "Active Astronauts",
   "retired": "Retired Astronauts",
   "inSpace": "Currently in Space",
-  "upButton": "top"
+  "upButton": "top",
+
+  "t_title_1": "Active Astronauts",
+  "t_title_2": "Retired Astronauts",
+  "t_title_3": "Currently in Space",
+  "t_name": "Name",
+  "t_age": "Age",
+  "t_agency": "Agency",
+  "t_nationality": "Nationality",
+  "t_flights_count": "Flights Count",
+  "t_spacewalks_count": "Spacewalks Count",
+
+  "founding_year": "Founded in ",
+  "agency_more_info": "Click <0>here</0> for more information.",
+
+  "birthday": "Born on ",
+  "age": "Age: {{years}} years",
+  "astronaut_more_info": "Click <0>here</0> for more information.",
+
+  "about_title": "About this Project",
+  "about_text_1": "I implemented this project as part of an internship. The primary focus was to understand and apply new technologies. For example, I used React, TypeScript, React-Router, Ant Design, i18next and Recoil.",
+  "about_text_2": "Thanks a lot to the 'Launch Library 2'-team for providing the data! :)",
+  "contact_title": "Contact",
+
+  "footer": "Astronaut-Project 2023"
 }
