@@ -3,10 +3,12 @@ import { ColumnProps, TablePaginationConfig } from 'antd/es/table';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
   astronautLoadingState,
+  currentAstronautIdState,
   searchParamAgencyState,
 } from 'recoilState/atom';
 import { AgencyModal } from './AgencyModal';
 import { Astronaut, Agency } from 'types';
+import { AstronautModal } from './AstronautModal';
 const { Title } = Typography;
 
 type AstronautTableProps = {
@@ -22,6 +24,9 @@ export const AstronautTable = ({
   const [searchParamAgency, setSearchParamAgency] = useRecoilState(
     searchParamAgencyState,
   );
+  const [currentAstronautId, setCurrentAstronautId] = useRecoilState(
+    currentAstronautIdState,
+  );
 
   const uniqueAgencyAbbrevs: string[] = Array.from(
     new Set(dataSource?.map((item) => item.agency.abbrev)),
@@ -35,6 +40,12 @@ export const AstronautTable = ({
   const nationalityFilters: { text: string; value: string }[] =
     uniqueNationalities.map((item) => ({ text: item, value: item }));
 
+  const handleAstronautClick = (astronautName: string) => () => {
+    const astronautId =
+      dataSource?.find((el) => el.name === astronautName)?.id || null;
+    setCurrentAstronautId(astronautId);
+  };
+
   const handleAgencyClick = (agencyId: number) => () => {
     setSearchParamAgency(agencyId);
   };
@@ -45,6 +56,9 @@ export const AstronautTable = ({
       dataIndex: 'name',
       key: 'name',
       defaultSortOrder: 'ascend',
+      render: (text: string) => (
+        <Button onClick={handleAstronautClick(text)}>{text}</Button>
+      ),
       sorter: {
         compare: (a: Astronaut, b: Astronaut) => a.name.localeCompare(b.name),
       },
@@ -126,6 +140,7 @@ export const AstronautTable = ({
         }}
       ></Table>
       {searchParamAgency && <AgencyModal />}
+      {currentAstronautId && <AstronautModal />}
     </>
   );
 };

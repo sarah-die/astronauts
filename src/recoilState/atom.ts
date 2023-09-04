@@ -13,6 +13,11 @@ export const searchParamAgencyState = atom({
   default: null as number | null,
 });
 
+export const currentAstronautIdState = atom({
+  key: 'currentAstronautIdState',
+  default: null as number | null,
+});
+
 export const astronautLoadingState = atom({
   key: 'astronautLoadingState',
   default: true as boolean,
