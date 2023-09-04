@@ -4,9 +4,13 @@ export interface AstronautData {
 
 export interface Astronaut {
   name: string;
-  age: number;
   agency: Agency;
+  age: number;
+  date_of_birth: string;
   nationality: string;
+  bio: string;
+  profile_image: string;
+  wiki: string;
   in_space: boolean;
   status: AstronautsStatus;
   flights_count: number;
@@ -28,15 +32,15 @@ export interface AstronautsStatus {
 }
 
 export interface AgencyDetail {
-  name?: string;
-  type?: string;
-  country_code?: string;
-  abbrev?: string;
-  description?: string;
-  founding_year?: string;
-  logo_url?: string;
-  info_url?: string;
-  image_url?: string;
+  name: string;
+  type: string;
+  country_code: string;
+  abbrev: string;
+  description: string;
+  founding_year: string;
+  logo_url: string;
+  info_url: string;
+  image_url: string;
 }
 
 export type Language = {

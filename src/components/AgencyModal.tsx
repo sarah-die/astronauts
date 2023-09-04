@@ -17,50 +17,50 @@ export const AgencyModal = () => {
     queryFn: () => getById(searchParamAgency),
   });
 
-  const agency: AgencyDetail = queryAgency.data || {};
+  const agency: AgencyDetail | null = queryAgency.data ?? null;
+
+  if (!agency) return null;
 
   return (
-    <>
-      <Modal
-        title={agency.abbrev}
-        centered
-        open={!!searchParamAgency}
-        onCancel={() => setSearchParamAgency(null)}
-        footer={null}
-      >
-        {queryAgency.status === 'loading' ? (
-          <Row justify="center">
-            <Spin />
+    <Modal
+      title={agency.abbrev}
+      centered
+      open={!!searchParamAgency}
+      onCancel={() => setSearchParamAgency(null)}
+      footer={null}
+    >
+      {queryAgency.status === 'loading' ? (
+        <Row justify="center">
+          <Spin />
+        </Row>
+      ) : (
+        <>
+          <Row gutter={15}>
+            <Col span={14}>
+              <Title level={4}>{agency.name}</Title>
+              <Text>Founded in {agency.founding_year}</Text>
+            </Col>
+            <Col span={10}>
+              <Image width={150} src={agency.logo_url} />
+            </Col>
           </Row>
-        ) : (
-          <>
-            <Row gutter={15}>
-              <Col span={14}>
-                <Title level={4}>{agency.name}</Title>
-                <Text>Founded in {agency.founding_year}</Text>
-              </Col>
-              <Col span={10}>
-                <Image width={150} src={agency.logo_url} />
-              </Col>
-            </Row>
-            <Divider />
-            <Text>{agency.description}</Text>
-            {agency.image_url !== null && (
-              <>
-                <Divider />
-                <Row justify="center">
-                  <Image width={300} src={agency.image_url} />
-                </Row>
-              </>
-            )}
-            <Divider />
-            <Text>
-              Click <Link to={agency.info_url || ''}>here</Link> for more
-              information.
-            </Text>
-          </>
-        )}
-      </Modal>
-    </>
+          <Divider />
+          <Text>{agency.description}</Text>
+          {agency.image_url !== null && (
+            <>
+              <Divider />
+              <Row justify="center">
+                <Image width={300} src={agency.image_url} />
+              </Row>
+            </>
+          )}
+          <Divider />
+          <Text>
+            Click <Link to={agency.info_url || ''}>here</Link> for more
+            information.
+          </Text>
+        </>
+      )}
+    </Modal>
   );
 };
