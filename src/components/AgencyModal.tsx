@@ -19,17 +19,15 @@ export const AgencyModal = () => {
 
   const agency: AgencyDetail | null = queryAgency.data ?? null;
 
-  if (!agency) return null;
-
   return (
     <Modal
-      title={agency.abbrev}
+      title={agency?.abbrev}
       centered
       open={!!searchParamAgency}
       onCancel={() => setSearchParamAgency(null)}
       footer={null}
     >
-      {queryAgency.status === 'loading' ? (
+      {!agency ? (
         <Row justify="center">
           <Spin />
         </Row>
